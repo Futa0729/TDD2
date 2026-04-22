@@ -3,16 +3,21 @@
     public class Quest
     {
         private List<Objective> objectives;
+        private bool isTurnedIn;
 
         public Quest(string v)
         {
             objectives = new List<Objective>();
+            isTurnedIn = false;
         }
 
         public bool IsCompleted 
         { 
             get    
             {
+                if (isTurnedIn == false)
+                    return false;
+                    
                 if (objectives.Count == 0)
                     return false;
 
@@ -53,6 +58,11 @@
                 throw new Exception();
 
             objective.CurrentAmount += v2;
+        }
+
+        public void TurnIn()
+        {
+            isTurnedIn = true;
         }
     }
 }

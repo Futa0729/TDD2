@@ -22,6 +22,7 @@ namespace TestProject
             var quest = CreateQuest();
             //Act
             quest.ProgressObjective("Kill Goblins", 5);
+            quest.TurnIn();
             //Assert
             Assert.True(quest.IsCompleted);
         }
@@ -63,5 +64,17 @@ namespace TestProject
             quest.AddObjective("Kill Goblins", 5);
             return quest;
         }
+
+        [Fact]
+        public void Quest_Is_Not_Completed_Until_Turned_In()
+        {
+        var quest = new Quest("Goblin Slayer");
+        quest.AddObjective("Kill Goblins", 5);
+
+        quest.ProgressObjective("Kill Goblins", 5);
+
+        Assert.False(quest.IsCompleted);
+        }
+
     }
 }
